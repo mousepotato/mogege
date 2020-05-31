@@ -4,5 +4,15 @@
     <div class="post-content">
         {{ .Content }}
     </div>
+
+    <div class="post-comment">
+        {{ if ( $.Params.showComments | default true ) }}
+            {{ if ne .Site.DisqusShortname "" }}
+                {{ template "_internal/disqus.html" . }}
+            {{ else if .Site.Params.enableGitalk }}
+                {{ partial "gitalk.html" . }}
+            {{ end }}
+        {{ end }}
+    </div>
 </div>
 {{end }}
